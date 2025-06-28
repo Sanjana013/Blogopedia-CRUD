@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Food Blog Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .navbar-brand {
+            margin-right: auto;
+        }
+        .carousel-item img {
+            height: 400px;
+            object-fit: cover;
+        }
+        .carousel-caption {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="landing.html">Healthy Meal (ja kono dino khabo na)</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="landing.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="articles.html">Articles</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary text-white" href="login.html">Sign In</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div id="blogCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg" class="d-block w-100" alt="Blog Image 1">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Blog Post 1</h5>
+                    <p>Bhalo dekhte kintu khabo na.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="d-block w-100" alt="Blog Image 2">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Blog Post 2</h5>
+                    <p>Atao bhalo dakhte but khete baje hobe jni.</p>
+                </div>
+            </div>
+            
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+    
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Latest Blogs</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="card-img-top" alt="Blog 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Blog Title 1</h5>
+                        <p class="card-text">Short description of the blog post.</p>
+                        <a href="#" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="card-img-top" alt="Blog 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Blog Title 2</h5>
+                        <p class="card-text">Short description of the blog post.</p>
+                        <a href="#" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://images.pexels.com/photos/7937000/pexels-photo-7937000.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="card-img-top" alt="Blog 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Blog Title 3</h5>
+                        <p class="card-text">Short description of the blog post.</p>
+                        <a href="#" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+              </div>
+        </div>
+    </div>
+    <div class="container my-5">
+      <h2 class="text-center mb-4">More Blogs</h2>
+      <div class="row">
+          <div class="col-md-6">
+              <div class="card">
+                  <img src="https://images.pexels.com/photos/12737918/pexels-photo-12737918.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" class="card-img-top" alt="Blog 4">
+                  <div class="card-body">
+                      <h5 class="card-title">Blog Title 4</h5>
+                      <p class="card-text">An additional blog post preview with details.</p>
+                      <a href="#" class="btn btn-primary">Read More</a>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="card">
+                  <img src="https://media.istockphoto.com/id/1416818056/photo/colourful-vegan-bowl-with-quinoa-and-sweet-potato.jpg?s=612x612&w=0&k=20&c=t1I58CqucV6bLRaa4iDy7PIVjnV8D9eWDjEsX9X-87k=" class="card-img-top" alt="Blog 5">
+                  <div class="card-body">
+                      <h5 class="card-title">Blog Title 5</h5>
+                      <p class="card-text">Another insightful blog article introduction.</p>
+                      <a href="#" class="btn btn-primary">Read More</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+    
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2025 My Blog. All rights reserved.</p>
+        <p>
+            <a href="#" class="text-white me-3">Privacy Policy</a>
+            <a href="#" class="text-white">Terms of Service</a>
+        </p>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+        }
+        #sidebar {
+            width: 250px;
+            position: fixed;
+            height: 100vh;
+            background: #343a40;
+            padding-top: 20px;
+        }
+        #sidebar div {
+            display: block;
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #sidebar div:hover {
+            background: #495057;
+        }
+        #content {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            padding: 20px;
+            transition: 0.3s;
+        }
+        .article-card {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background: #f8f9fa;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .article-card img {
+            width: 200px;
+            height: 150px;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+        .article-card .card-body {
+            flex-grow: 1;
+        }
+
+
+    </style>
+    <script>
+        const JWT_TOKEN = localStorage.getItem('JWT-TOKEN');
+        if (!JWT_TOKEN) {
+            window.location.href = 'login.html';
+        }
+    </script>
+</head>
+<body>
+    <div id="sidebar">
+        <div>Home</div>
+        <div onclick="window.location.href='articles.html'">New Articles</div>
+        <div onclick="logout()">Logout</div>
+    </div>
+
+   
+    <div id="content">
+        <div class="container">
+            <h1 class="text-center my-4">Articles</h1>
+
+            
+            <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addArticleModal">
+                Add Article
+            </button>
+
+           
+            <div class="article-list"></div>
+        </div>
+
+        
+            <!-- <h1 class="text-center my-4">Articles</h1>
+            <div class="article-list">
+                <div class="article-card">
+                    <img src="https://via.placeholder.com/300" alt="Article Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Article 1</h5>
+                        <p class="card-text">Brief summary of the article. This article discusses important insights.</p>
+                        <a href="details.html" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <img src="https://via.placeholder.com/300" alt="Article Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Article 2</h5>
+                        <p class="card-text">Brief summary of the article. This article provides valuable knowledge.</p>
+                        <a href="details.html" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <img src="https://via.placeholder.com/300" alt="Article Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Article 3</h5>
+                        <p class="card-text">Brief summary of the article. Learn more about this topic in detail.</p>
+                        <a href="details.html" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div> -->
+      
+
+
+    </div>
+
+   
+  
+    <div class="modal fade" id="addArticleModal" tabindex="-1" aria-labelledby="addArticleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addArticleModalLabel">Add New Article</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="articleForm">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="content" class="form-label">Content</label>
+                            <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="thumbnailUrl" class="form-label">Thumbnail URL</label>
+                            <input type="url" class="form-control" id="thumbnailUrl" name="thumbnailUrl" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Publish</button>
+                    </form>
+                </div>
+
+                <div id="article-list">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    
+    <script>
+
+function decodeJWT(token) {
+    const base64Url = token.split('.')[1]; // Get payload part
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); // Fix Base64 encoding
+    const jsonPayload = decodeURIComponent(
+        atob(base64)
+            .split('')
+            .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+            .join('')
+    );
+
+    return JSON.parse(jsonPayload);
+}
+
+const token = localStorage.getItem("JWT-TOKEN");
+console.log(decodeJWT(token));
+const decodedJWT = decodeJWT(token);
+console.log(decodedJWT._id);
+
+const articleList = document.getElementById("article-list")
+const articles = []
+
+function displayArticles() {
+
+    fetch(`http://localhost:3000/article/user/${decodedJWT._id}`, {
+                    method: "GET",
+                    headers:{
+                        'Content-Type' : 'application/json',
+                        'authorization' : `bearer ${token}`
+                    },
+                   
+                })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log(data)
+                    const reqData = data.data;
+                    console.log(reqData)
+                    const articles = [...reqData];
+                }).catch((err) => {
+                    console.log(err);
+                })
+
+            console.log(articles)
+            articles.forEach(article => {
+                const articleCard = `
+                    <div class="article-card">
+                        <img src="${article.thumbnailurl}" alt="Article Thumbnail">
+                        <div class="card-body">
+                            <h5 class="card-title">${article.title}</h5>
+                            <p class="card-text">${article.desc}</p>
+                            <p class="text-muted">${article.createdAt}</p>
+                            <a href="details.html?id=${article.id}" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                `;
+                articleList.innerHTML += articleCard;
+                console.log(articleCard)
+            });
+
+            console.log(articleList.innerHTML)
+        }
+
+
+        displayArticles(); 
+
+
+   
+
+
+    function logout() {
+
+        localStorage.removeItem("JWT-TOKEN")
+        window.location.href = "landing.html"
+
+    }
+
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
